@@ -103,11 +103,11 @@ def get_default_query_results(quran: Quran):
     ]
     for s, a in ayat:
         ayah = "%d:%d" % (s, a)
-        english = quran.get_ayah(s, a)
+        indonesia = quran.get_ayah(s, a)
         results.append(InlineQueryResultArticle(
             ayah + "def", title=ayah,
-            description=english[:120],
-            input_message_content=InputTextMessageContent(english))
+            description=indonesia[:120],
+            input_message_content=InputTextMessageContent(indonesia))
         )
     return results
 
@@ -122,17 +122,17 @@ def main():
         update_id = None
 
     interface = telegram.ReplyKeyboardMarkup(
-        [["Arabic", "Audio", "English", "Tafsir"],
-         ["Previous", "Random", "Next"]],
+        [["Arabic", "Audio", "Indonesia", "Tafsir"],
+         ["Sebelumnya", "Acak", "Berikutnya"]],
         resize_keyboard=True)
 
     data = {
-        "english": Quran("translation"),
+        "indonesia": Quran("translation"),
         "tafsir": Quran("tafsir"),
         "index": make_index(),
         "interface": interface
     }
-    data["default_query_results"] = get_default_query_results(data["english"])
+    data["default_query_results"] = get_default_query_results(data["indonesia"])
 
     while True:
         try:
@@ -152,7 +152,7 @@ def serve(bot, data):
     global update_id
 
     def send_quran(s: int, a: int, quran_type: str, chat_id: int, reply_markup=None):
-        if quran_type in ("english", "tafsir"):
+        if quran_type in ("indonesia", "tafsir"):
             text = data[quran_type].get_ayah(s, a)
             bot.send_message(chat_id=chat_id, text=text[:MAX_MESSAGE_LENGTH],
                              reply_markup=reply_markup)
@@ -184,12 +184,12 @@ def serve(bot, data):
             s, a = parse_ayah(query)
             if s is not None and Quran.exists(s, a):
                 ayah = "%d:%d" % (s, a)
-                english = data["english"].get_ayah(s, a)
+                indonesia = data["indonesia"].get_ayah(s, a)
                 tafsir = data["tafsir"].get_ayah(s, a)
                 results.append(InlineQueryResultArticle(
-                    ayah + "english", title="English",
-                    description=english[:120],
-                    input_message_content=InputTextMessageContent(english))
+                    ayah + "indonesia", title="English",
+                    description=indonesia[:120],
+                    input_message_content=InputTextMessageContent(indonesia))
                 )
                 results.append(InlineQueryResultArticle(
                     ayah + "tafsir", title="Tafsir",
@@ -210,7 +210,7 @@ def serve(bot, data):
         if state is not None:
             s, a, quran_type = state
         else:
-            s, a, quran_type = 1, 1, "english"
+            s, a, quran_type = 1, 1, "indonesia"
 
         print("%d:%.3f:%s" % (chat_id, time(), message.replace("\n", " ")))
 
@@ -222,7 +222,7 @@ def serve(bot, data):
             if command in ("start", "help"):
                 text = ("Send me the numbers of a surah and ayah, for example:"
                         " <b>2:255</b>. Then I respond with that ayah from the Holy "
-                        "Quran. Type /index to see all Surahs or try /random. "
+                        "Quran. Type /index to see all Surahs or try /acak. "
                         "I'm available in any chat on Telegram, just type: <b>@BismillahBot</b>\n\n"
                         "For audio tracks of complete Surahs, talk to @AudioQuranBot.")
             elif command == "about":
@@ -241,15 +241,15 @@ def serve(bot, data):
                 bot.send_message(chat_id=chat_id, text=text, parse_mode="HTML")
                 continue
 
-        if message in ("english", "tafsir", "audio", "arabic"):
+        if message in ("indonesia", "tafsir", "audio", "arabic"):
             send_quran(s, a, message, chat_id)
             continue
-        elif message in ("next", "previous", "random", "/random"):
-            if message == "next":
+        elif message in ("berikutnya", "sebelumnya", "acak", "/acak"):
+            if message == "berikutnya":
                 s, a = Quran.get_next_ayah(s, a)
-            elif message == "previous":
+            elif message == "sebelumnya":
                 s, a = Quran.get_previous_ayah(s, a)
-            elif message in ("random", "/random"):
+            elif message in ("acak", "/acak"):
                 s, a = Quran.get_random_ayah()
             send_quran(s, a, quran_type, chat_id)
             continue

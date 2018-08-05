@@ -21,8 +21,8 @@ Use the bot by messaging [Bismillahbot][] on [Telegram][]. For every verse the
 bot has an English translation from [Imam Ahmad Raza][], audio recitation
 by [Shaykh Mahmoud Khalil al-Husary][], and exegesis (tafsir)
 from [Tafsir al-Jalalayn][]. The translation and tafsir are available anywhere
-on Telegram via [inline mode][], just start a text with `@BismillahBot` (for
-example, type `@BismillahBot 1:1` in any chat). A conversation looks like:
+on Telegram via [inline mode][], just start a text with `@BismillahIDBot` (for
+example, type `@BismillahIDBot 1:1` in any chat). A conversation looks like:
 ![example]
 
 Also see [AudioQuranBot][], a bot that sends audio files of complete surahs.
@@ -70,7 +70,7 @@ for the bot to function. Run the following in the bot's directory to get the
 data:
 
 ```bash
-wget "http://tanzil.net/trans/en.ahmedraza"
+wget "http://tanzil.net/trans/id.indonesian"
 wget "http://tanzil.net/res/text/metadata/quran-data.xml"
 wget "http://www.altafsir.com/Books/Al_Jalalain_Eng.pdf"
 pdftotext -nopgbrk Al_Jalalain_Eng.pdf
