@@ -187,7 +187,7 @@ def serve(bot, data):
                 indonesia = data["indonesia"].get_ayah(s, a)
                 tafsir = data["tafsir"].get_ayah(s, a)
                 results.append(InlineQueryResultArticle(
-                    ayah + "indonesia", title="English",
+                    ayah + "indonesia", title="Indonesia",
                     description=indonesia[:120],
                     input_message_content=InputTextMessageContent(indonesia))
                 )
@@ -220,18 +220,18 @@ def serve(bot, data):
         if message.startswith("/"):
             command = message[1:]
             if command in ("start", "help"):
-                text = ("Send me the numbers of a surah and ayah, for example:"
-                        " <b>2:255</b>. Then I respond with that ayah from the Holy "
-                        "Quran. Type /index to see all Surahs or try /acak. "
-                        "I'm available in any chat on Telegram, just type: <b>@BismillahBot</b>\n\n"
-                        "For audio tracks of complete Surahs, talk to @AudioQuranBot.")
+                text = ("Kirimkan saya nomor surah dan ayat, misalnya:"
+                        " <b>2:255</b>. Lalu saya menanggapi dengan ayat itu dari Kitab Suci "
+                        "Al-Qur'an. Ketik /index untuk melihat semua surat atau mencoba /acak. "
+                        "Saya tersedia di obrolan apa pun di Telegram, cukup ketik: <b>@BismillahIDBot</b>\n\n"
+                        "Untuk trek audio Surah lengkap, bicara ke @AudioQuranBot.")
             elif command == "about":
-                text = ("The English translation is by Imam Ahmed Raza from "
-                        "tanzil.net/trans/. The audio is a recitation by "
-                        "Shaykh Mahmoud Khalil al-Husary from everyayah.com. "
-                        "The tafsir is Tafsir al-Jalalayn from altafsir.com."
-                        "The source code of BismillahBot is available at: "
-                        "https://github.com/rahiel/BismillahBot.")
+                text = ("Terjemahan Bahasa Indonesia oleh Departemen Agama Indonesia di "
+                        "tanzil.net/trans/. Audio di baca oleh "
+                        "Shaykh Mahmoud Khalil al-Husary dari everyayah.com. "
+                        "Tafsirnya adalah Tafsir al-Jalalayn berasal dari altafsir.com."
+                        "Kode sumber BismillahIDBot tersedia di: "
+                        "https://github.com/AyraHikari/BismillahBot.")
             elif command == "index":
                 text = data["index"]
             else:
