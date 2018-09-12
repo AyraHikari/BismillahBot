@@ -112,7 +112,7 @@ class Quran:
         if data == "arabic":
             self.text = parse_quran("quran-uthmani.txt")
         elif data == "translation":
-            self.text = parse_quran("en.ahmedraza")
+            self.text = parse_quran("id.indonesian")
         elif data == "tafsir":
             self.text = parse_quran_tafsir()
 
