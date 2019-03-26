@@ -70,6 +70,7 @@ for the bot to function. Run the following in the bot's directory to get the
 data:
 
 ```bash
+sudo apt-get install poppler-utils
 wget "http://tanzil.net/trans/id.indonesian"
 wget "http://tanzil.net/res/text/metadata/quran-data.xml"
 wget "http://www.altafsir.com/Books/Al_Jalalain_Eng.pdf"
@@ -86,6 +87,13 @@ the edges with [ImageMagick](https://www.imagemagick.org/script/index.php) and
 ``` shell
 cd quran_images/
 parallel "echo {}; convert {} -trim {}" ::: *.png
+```
+We need to install [pngout](http://www.jonof.id.au/kenutils) before optimize the images:
+``` shell
+wget http://static.jonof.id.au/dl/kenutils/pngout-20150319-linux.tar.gz
+tar -xvzf pngout-20150319-linux.tar.gz
+cd pngout-20150319-linux/i686/
+sudo install pngout /usr/local/bin/pngout
 ```
 Then we optimize the images with [pngout](http://www.jonof.id.au/kenutils):
 ``` shell
