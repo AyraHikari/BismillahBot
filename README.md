@@ -46,7 +46,7 @@ Debian/Ubuntu in a virtualenv:
 
 ```bash
 sudo apt install redis-server git python3-pip python3-dev virtualenv
-git clone https://github.com/rahiel/BismillahBot.git
+git clone https://github.com/AyraHikari/BismillahBot.git
 cd BismillahBot/
 virtualenv -p python3 venv
 . venv/bin/activate
